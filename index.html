@@ -581,18 +581,55 @@
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-title">📊 SIEM Integration</div>
+                <div class="project-card detailed-project">
+                    <div class="project-title">📊 ELK SIEM Deployment & Threat Detection</div>
                     <div class="project-image-placeholder">
-                        [Add Arctic Wolf SIEM dashboard or log analysis screenshots]
+                        [Add ELK dashboard screenshots, detection rules, or network topology diagrams]
                     </div>
                     <div class="project-description">
-                        Set up comprehensive endpoint log forwarding to Arctic Wolf SIEM platform. Created custom alert triage workflows and automated threat detection processes for improved security monitoring.
+                        Deployed comprehensive Elastic Stack (ELK) SIEM for centralized security monitoring with automated threat response. Achieved 100% critical threat containment with 4.2 min MTTD and 38 sec MTTR.
+                    </div>
+                    <button class="expand-btn" onclick="toggleDetails(this)">View Technical Implementation →</button>
+                    <div class="project-details" style="display: none;">
+                        <div class="playbook-steps">
+                            <div class="step">
+                                <h4>🏗️ Architecture & Deployment</h4>
+                                <p><strong>Environment:</strong> Windows Server (ec2amaz-g1470vo), Workstation (luv2)</p>
+                                <p><strong>Stack:</strong> Elasticsearch → Kibana → Fleet Server → Elastic Agents</p>
+                                <p><strong>Integrations:</strong> Elastic Defend, Windows Defender, Network Packet Capture</p>
+                            </div>
+                            <div class="step">
+                                <h4>🎯 Custom Detection Rules</h4>
+                                <p><strong>RDP Brute Force:</strong> Tuned rule from 36 alerts/day (12% accuracy) to 4 alerts/day (92% accuracy)</p>
+                                <p><strong>Malware Detection:</strong> Browser-based file downloads in Downloads folder with hash analysis</p>
+                                <p><strong>Query Example:</strong> event.code: "4625" AND process.name != "System Idle Process"</p>
+                            </div>
+                            <div class="step">
+                                <h4>🦠 Real Threat Testing</h4>
+                                <p><strong>WannaCry Test:</strong> Blocked execution in <2 seconds, prevented file rename operations</p>
+                                <p><strong>RDP Attack:</strong> Detected attacker 84.17.43.87 (Paris), auto-isolated host in 38 seconds</p>
+                                <p><strong>Defender-Off Test:</strong> Elastic Defend caught unsigned module loads despite disabled Windows Defender</p>
+                            </div>
+                            <div class="step">
+                                <h4>📈 Performance Metrics</h4>
+                                <p><strong>MTTD:</strong> 4.2 minutes | <strong>MTTR:</strong> 38 seconds | <strong>Critical Containment:</strong> 100%</p>
+                                <p><strong>Rule Optimization:</strong> Reduced alert fatigue by 89% through intelligent tuning</p>
+                                <p><strong>Network Security:</strong> Identified and fixed overly permissive RDP security group rules</p>
+                            </div>
+                            <div class="step">
+                                <h4>🔧 Automated Response Actions</h4>
+                                <p>Host isolation via Elastic Agent, Windows Defender quarantine, firewall IP blocking</p>
+                                <p>Custom incident response playbooks for malware and RDP attacks</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-tags">
-                        <span class="project-tag">SIEM</span>
-                        <span class="project-tag">Log Analysis</span>
+                        <span class="project-tag">ELK Stack</span>
                         <span class="project-tag">Threat Detection</span>
+                        <span class="project-tag">Automated Response</span>
+                        <span class="project-tag">Rule Tuning</span>
+                        <span class="project-tag">Malware Analysis</span>
+                        <span class="project-tag">Performance Metrics</span>
                     </div>
                 </div>
 
