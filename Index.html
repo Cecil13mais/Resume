@@ -1,0 +1,111 @@
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { motion } from "framer-motion";
+
+export default function ResumeSite() {
+  return (
+    <div className="p-6 space-y-8 max-w-4xl mx-auto">
+      <motion.h1 className="text-4xl font-bold text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        Cecil Mais – Cybersecurity-Focused IT System Admin
+      </motion.h1>
+      <div className="text-center">
+        <p>📧 cecil13mais@gmail.com | 📞 (954) 478-0867 | <a href="https://linkedin.com/in/cecilmais" target="_blank" className="text-blue-600 underline">LinkedIn</a></p>
+      </div>
+
+      <Tabs defaultValue="overview" className="w-full">
+        <TabsList className="flex flex-wrap justify-center gap-2">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="skills">Skills</TabsTrigger>
+          <TabsTrigger value="experience">Experience</TabsTrigger>
+          <TabsTrigger value="projects">Projects</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="overview">
+          <Card>
+            <CardContent className="p-4 space-y-2">
+              <h2 className="text-xl font-semibold">Objective</h2>
+              <p>
+                Cybersecurity-focused IT System Admin with over 3 years of experience strengthening security posture in hybrid environments...
+              </p>
+              <h3 className="font-semibold">Education & Certifications</h3>
+              <ul className="list-disc pl-5">
+                <li>BS in IT (Cybersecurity Minor), FIU, Aug 2024 – Present</li>
+                <li>AS in IT, Broward College, Aug 2023 – May 2024</li>
+                <li>Certs: Security+, AZ-500, Network+, TryHackMe SecEng, CySA+ (in progress)</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="skills">
+          <Card>
+            <CardContent className="p-4 grid grid-cols-2 gap-4">
+              <div>
+                <h3 className="font-semibold">Security & Monitoring</h3>
+                <p>Arctic Wolf SIEM, Sentinel One, Defender, Barracuda, Nmap</p>
+              </div>
+              <div>
+                <h3 className="font-semibold">Endpoint & Patch</h3>
+                <p>Intune, SCCM, Ninja One, OpenVAS</p>
+              </div>
+              <div>
+                <h3 className="font-semibold">Identity & Cloud</h3>
+                <p>Azure AD, Okta, GCP, Azure, O365, Windows/Linux</p>
+              </div>
+              <div>
+                <h3 className="font-semibold">Automation & Dev</h3>
+                <p>PowerShell, Python, HTML, CSS, JavaScript, SQL</p>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="experience">
+          <Card>
+            <CardContent className="p-4 space-y-4">
+              <div>
+                <h3 className="text-lg font-semibold">Mi-tech One – System Admin / IT Specialist</h3>
+                <p className="text-sm italic">Jan 2024 – Present</p>
+                <ul className="list-disc pl-5">
+                  <li>Integrated Arctic Wolf SIEM, cut threat detection time by 50%</li>
+                  <li>Deployed 500+ secure endpoints using Intune & NinjaOne</li>
+                  <li>Automated patching, BitLocker via GPO, improved auth with Okta MFA</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">CodePath – Cybersecurity Apprentice</h3>
+                <p className="text-sm italic">Mar 2025 – Aug 2025</p>
+                <ul className="list-disc pl-5">
+                  <li>Patched vulnerabilities, enforced CIS Benchmarks</li>
+                  <li>Escalated incidents, updated city security policy</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">Buchanan Technologies – Help Desk Rep (L1/L2)</h3>
+                <p className="text-sm italic">Jan 2021 – Dec 2023</p>
+                <ul className="list-disc pl-5">
+                  <li>Hardened 150+ devices using SCCM and GPO</li>
+                  <li>Resolved network/security issues; authored documentation</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="projects">
+          <Card>
+            <CardContent className="p-4 space-y-4">
+              <p className="text-center">Click below to view a dedicated projects page.</p>
+              <div className="text-center">
+                <Button asChild>
+                  <a href="/projects" className="text-white">Go to Projects Page</a>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}
