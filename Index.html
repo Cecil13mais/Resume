@@ -1,111 +1,833 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { motion } from "framer-motion";
-
-export default function ResumeSite() {
-  return (
-    <div className="p-6 space-y-8 max-w-4xl mx-auto">
-      <motion.h1 className="text-4xl font-bold text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        Cecil Mais – Cybersecurity-Focused IT System Admin
-      </motion.h1>
-      <div className="text-center">
-        <p>📧 cecil13mais@gmail.com | 📞 (954) 478-0867 | <a href="https://linkedin.com/in/cecilmais" target="_blank" className="text-blue-600 underline">LinkedIn</a></p>
-      </div>
-
-      <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="flex flex-wrap justify-center gap-2">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="skills">Skills</TabsTrigger>
-          <TabsTrigger value="experience">Experience</TabsTrigger>
-          <TabsTrigger value="projects">Projects</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="overview">
-          <Card>
-            <CardContent className="p-4 space-y-2">
-              <h2 className="text-xl font-semibold">Objective</h2>
-              <p>
-                Cybersecurity-focused IT System Admin with over 3 years of experience strengthening security posture in hybrid environments...
-              </p>
-              <h3 className="font-semibold">Education & Certifications</h3>
-              <ul className="list-disc pl-5">
-                <li>BS in IT (Cybersecurity Minor), FIU, Aug 2024 – Present</li>
-                <li>AS in IT, Broward College, Aug 2023 – May 2024</li>
-                <li>Certs: Security+, AZ-500, Network+, TryHackMe SecEng, CySA+ (in progress)</li>
-              </ul>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="skills">
-          <Card>
-            <CardContent className="p-4 grid grid-cols-2 gap-4">
-              <div>
-                <h3 className="font-semibold">Security & Monitoring</h3>
-                <p>Arctic Wolf SIEM, Sentinel One, Defender, Barracuda, Nmap</p>
-              </div>
-              <div>
-                <h3 className="font-semibold">Endpoint & Patch</h3>
-                <p>Intune, SCCM, Ninja One, OpenVAS</p>
-              </div>
-              <div>
-                <h3 className="font-semibold">Identity & Cloud</h3>
-                <p>Azure AD, Okta, GCP, Azure, O365, Windows/Linux</p>
-              </div>
-              <div>
-                <h3 className="font-semibold">Automation & Dev</h3>
-                <p>PowerShell, Python, HTML, CSS, JavaScript, SQL</p>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="experience">
-          <Card>
-            <CardContent className="p-4 space-y-4">
-              <div>
-                <h3 className="text-lg font-semibold">Mi-tech One – System Admin / IT Specialist</h3>
-                <p className="text-sm italic">Jan 2024 – Present</p>
-                <ul className="list-disc pl-5">
-                  <li>Integrated Arctic Wolf SIEM, cut threat detection time by 50%</li>
-                  <li>Deployed 500+ secure endpoints using Intune & NinjaOne</li>
-                  <li>Automated patching, BitLocker via GPO, improved auth with Okta MFA</li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cecil Mais - Cybersecurity Professional</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0d3b66;
+            --secondary: #1d6fa5;
+            --accent: #28a745;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --highlight: #ffc107;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .cyber-bg {
+            background: linear-gradient(rgba(13, 59, 102, 0.9), rgba(13, 59, 102, 0.95)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230d3b66"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%231d6fa5" stroke-width="1"/></svg>');
+            background-size: 300px;
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 5px solid var(--highlight);
+        }
+        
+        .navbar {
+            background: rgba(13, 59, 102, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+        
+        .section-body {
+            padding: 1.5rem;
+        }
+        
+        .skill-badge {
+            background: #e9f7fe;
+            color: var(--primary);
+            font-weight: 500;
+            margin: 0.3rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            border: 1px solid #b8e2f8;
+            transition: all 0.2s;
+        }
+        
+        .skill-badge:hover {
+            background: var(--secondary);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .experience-card {
+            border-left: 4px solid var(--secondary);
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .experience-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -7px;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border: 3px solid var(--secondary);
+            border-radius: 50%;
+        }
+        
+        .progress {
+            height: 10px;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+        }
+        
+        .contact-info a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            margin: 0.5rem 1rem;
+        }
+        
+        .contact-info a:hover {
+            color: var(--highlight);
+            transform: translateY(-2px);
+        }
+        
+        .cert-badge {
+            background: #d4edda;
+            color: #155724;
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 0.2rem;
+        }
+        
+        .achievement-badge {
+            background: #fff3cd;
+            color: #856404;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .project-card {
+            transition: all 0.3s;
+            cursor: pointer;
+            height: 100%;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-image {
+            height: 180px;
+            object-fit: cover;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .active-page {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .back-button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .back-button:hover {
+            background: var(--primary);
+        }
+        
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .gallery-caption {
+            padding: 1rem;
+            background: white;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--secondary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .floating-btn:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-shield-alt me-2"></i>
+                <span>Cecil Mais</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showPage('resume-page')">Resume</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showPage('projects-page')">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
                 </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">CodePath – Cybersecurity Apprentice</h3>
-                <p className="text-sm italic">Mar 2025 – Aug 2025</p>
-                <ul className="list-disc pl-5">
-                  <li>Patched vulnerabilities, enforced CIS Benchmarks</li>
-                  <li>Escalated incidents, updated city security policy</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">Buchanan Technologies – Help Desk Rep (L1/L2)</h3>
-                <p className="text-sm italic">Jan 2021 – Dec 2023</p>
-                <ul className="list-disc pl-5">
-                  <li>Hardened 150+ devices using SCCM and GPO</li>
-                  <li>Resolved network/security issues; authored documentation</li>
-                </ul>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+            </div>
+        </div>
+    </nav>
 
-        <TabsContent value="projects">
-          <Card>
-            <CardContent className="p-4 space-y-4">
-              <p className="text-center">Click below to view a dedicated projects page.</p>
-              <div className="text-center">
-                <Button asChild>
-                  <a href="/projects" className="text-white">Go to Projects Page</a>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+    <!-- Resume Page -->
+    <div id="resume-page" class="page active-page">
+        <!-- Header -->
+        <header class="cyber-bg text-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <img src="https://ui-avatars.com/api/?name=Cecil+Mais&background=1d6fa5&color=fff&size=150" 
+                             class="rounded-circle mb-3 border border-4 border-white" 
+                             alt="Cecil Mais">
+                        <h1 class="display-4 fw-bold mb-3">Cecil Mais</h1>
+                        <h3 class="fw-light mb-4">Cybersecurity-Focused IT System Administrator</h3>
+                        
+                        <div class="contact-info">
+                            <a href="mailto:cecil13mais@gmail.com">
+                                <i class="fas fa-envelope me-1"></i> cecil13mais@gmail.com
+                            </a>
+                            <a href="tel:+19544780867">
+                                <i class="fas fa-phone me-1"></i> +1 (954) 478-0867
+                            </a>
+                            <a href="https://linkedin.com/in/cecilmais" target="_blank">
+                                <i class="fab fa-linkedin me-1"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="container py-5">
+            <!-- Objective -->
+            <div class="section-card">
+                <div class="section-header">
+                    <i class="fas fa-bullseye me-2"></i> Professional Objective
+                </div>
+                <div class="section-body">
+                    <p>Cybersecurity-focused IT System Admin with over 3 years of experience strengthening security posture in hybrid environments. Demonstrated success in reducing email-based incidents by 60%, integrating Arctic Wolf SIEM, and automating patch management. Skilled in endpoint protection, threat detection, and identity management.</p>
+                    <div class="mt-3">
+                        <span class="badge bg-primary me-2">Endpoint Protection</span>
+                        <span class="badge bg-primary me-2">Threat Detection</span>
+                        <span class="badge bg-primary me-2">Identity Management</span>
+                        <span class="badge bg-primary me-2">SIEM Integration</span>
+                    </div>
+                    <div class="mt-3">
+                        <strong>Currently pursuing:</strong> 
+                        <span class="cert-badge">CompTIA CySA+</span>
+                        <span class="cert-badge">B.S. in Information Technology</span>
+                        <span class="cert-badge">Cybersecurity Minor</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education & Certifications -->
+            <div class="section-card">
+                <div class="section-header">
+                    <i class="fas fa-graduation-cap me-2"></i> Education & Certifications
+                </div>
+                <div class="section-body">
+                    <div class="mb-4">
+                        <h5>Bachelor of Science in Information Technology (Cybersecurity Minor)</h5>
+                        <p class="mb-1">Florida International University | Aug 2024 - Present</p>
+                        <p class="text-muted">Relevant Coursework:</p>
+                        <ul>
+                            <li>Network Defense and Countermeasures</li>
+                            <li>Ethical Hacking & Penetration Testing</li>
+                            <li>Windows Server Security</li>
+                            <li>Incident Response & Disaster Recovery</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Associate of Science in Information Technology</h5>
+                        <p class="mb-1">Broward College | Aug 2023 - May 2024</p>
+                        <p class="text-muted">Relevant Coursework:</p>
+                        <ul>
+                            <li>Networking Fundamentals</li>
+                            <li>Linux Admin</li>
+                            <li>Security Essentials</li>
+                            <li>Computer Hardware</li>
+                            <li>IT Automation with Python</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h5>Certifications</h5>
+                        <div>
+                            <span class="cert-badge">CompTIA Security+</span>
+                            <span class="cert-badge">Microsoft Azure Security (AZ-500)</span>
+                            <span class="cert-badge">CompTIA Network+</span>
+                            <span class="cert-badge">Security Engineer Certificate - TryHackMe</span>
+                            <span class="cert-badge bg-warning text-dark">CompTIA CYSA+ (In Progress)</span>
+                            <span class="cert-badge">Remote IT & Security Management by Kaseya</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Skills -->
+            <div class="section-card">
+                <div class="section-header">
+                    <i class="fas fa-laptop-code me-2"></i> Technical Skills
+                </div>
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="fas fa-shield-alt me-2 text-success"></i> Security & Monitoring</h5>
+                            <div>
+                                <span class="skill-badge">Arctic Wolf SIEM</span>
+                                <span class="skill-badge">Sentinel One</span>
+                                <span class="skill-badge">Microsoft Defender</span>
+                                <span class="skill-badge">Barracuda Email Security</span>
+                                <span class="skill-badge">Nmap</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="fas fa-tools me-2 text-info"></i> Endpoint & Patch Management</h5>
+                            <div>
+                                <span class="skill-badge">Microsoft Intune</span>
+                                <span class="skill-badge">SCCM</span>
+                                <span class="skill-badge">Ninja One</span>
+                                <span class="skill-badge">OpenVas</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="fas fa-user-lock me-2 text-primary"></i> Identity & Access</h5>
+                            <div>
+                                <span class="skill-badge">Azure AD</span>
+                                <span class="skill-badge">Okta MFA</span>
+                                <span class="skill-badge">Conditional Access</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="fas fa-cloud me-2 text-secondary"></i> Cloud & OS</h5>
+                            <div>
+                                <span class="skill-badge">Windows Server</span>
+                                <span class="skill-badge">Windows 10/11</span>
+                                <span class="skill-badge">Linux (Ubuntu, CentOS)</span>
+                                <span class="skill-badge">GCP</span>
+                                <span class="skill-badge">Azure</span>
+                                <span class="skill-badge">Office 365</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="fas fa-code me-2 text-danger"></i> Scripting & Automation</h5>
+                            <div>
+                                <span class="skill-badge">PowerShell</span>
+                                <span class="skill-badge">Bash</span>
+                                <span class="skill-badge">Python</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <h5><i class="fas fa-database me-2 text-warning"></i> Development & Data</h5>
+                            <div>
+                                <span class="skill-badge">Web Development (HTML, CSS, JavaScript)</span>
+                                <span class="skill-badge">SQL (MySQL/PostgreSQL)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <h5><i class="fas fa-file-contract me-2 text-success"></i> Policies & Compliance</h5>
+                            <div>
+                                <span class="skill-badge">GPO</span>
+                                <span class="skill-badge">CIS Benchmarks</span>
+                                <span class="skill-badge">NIST Frameworks</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Experience -->
+            <div class="section-card">
+                <div class="section-header">
+                    <i class="fas fa-briefcase me-2"></i> Professional Experience
+                </div>
+                <div class="section-body">
+                    <div class="experience-card">
+                        <h5>System Administrator / IT Specialist</h5>
+                        <p class="text-primary fw-bold">Mi-tech One, Fort Lauderdale, FL | Jan 2024 - Present</p>
+                        <ul>
+                            <li>Integrated Arctic Wolf SIEM and reduced time to detect high-severity threats by 50%</li>
+                            <li>Deployed 500+ secure Windows endpoints using Intune and NinjaOne, improving rollout time by 40%</li>
+                            <li>Configured Barracuda Email Security to block phishing attempts, resulting in a 60% drop in incidents</li>
+                            <li>Automated patching with Ansible and PowerShell, reducing vulnerability remediation time by 35%</li>
+                            <li>Implemented BitLocker via GPO and enforced secure baselines, decreasing misconfigurations by 25%</li>
+                            <li>Onboarded users with Azure AD and Okta MFA, enhancing authentication security</li>
+                        </ul>
+                        <div class="achievement-badge">
+                            <i class="fas fa-trophy me-2"></i> Reduced email-based incidents by 60%
+                        </div>
+                    </div>
+                    
+                    <div class="experience-card">
+                        <h5>Cybersecurity Apprenticeship</h5>
+                        <p class="text-primary fw-bold">Code Path | Remote | Mar 2025 - Aug 2025</p>
+                        <ul>
+                            <li>Enforced CIS Benchmarks and patched vulnerabilities across city-managed systems</li>
+                            <li>Analyzed logs and escalated incidents, contributing to two major updates in security policy</li>
+                            <li>Maintained hardened workstation configurations for over 100 users across field and office teams</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-card">
+                        <h5>Level 1/Level 2 Help Desk Representative</h5>
+                        <p class="text-primary fw-bold">Buchanan Technologies | Jan 2021 - Dec 2023</p>
+                        <ul>
+                            <li>Imaged and hardened 150+ devices using SCCM and GPO-based policies</li>
+                            <li>Resolved escalated network and endpoint security issues related to DNS, DHCP, and Intune</li>
+                            <li>Authored technical documentation, improving Tier 1 resolution rates by 20%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Preview -->
+            <div class="section-card">
+                <div class="section-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="fas fa-project-diagram me-2"></i> Security Projects
+                    </div>
+                    <a href="#" class="btn btn-sm btn-light" onclick="showPage('projects-page')">
+                        View All Projects <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card project-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Phishing Triage Playbook</h5>
+                                    <p class="card-text">Developed intake and escalation playbook that reduced response time by 45%</p>
+                                    <div class="mt-2">
+                                        <span class="badge bg-secondary">Incident Response</span>
+                                        <span class="badge bg-secondary">Workflow Automation</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="card project-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Active Directory Hardening</h5>
+                                    <p class="card-text">Applied lockout policies and auditing, reducing unauthorized access incidents</p>
+                                    <div class="mt-2">
+                                        <span class="badge bg-secondary">AD Security</span>
+                                        <span class="badge bg-secondary">Policy Enforcement</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="card project-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Okta MFA Rollout</h5>
+                                    <p class="card-text">Enforced MFA for 500+ users, strengthening access control and meeting compliance</p>
+                                    <div class="mt-2">
+                                        <span class="badge bg-secondary">Identity Management</span>
+                                        <span class="badge bg-secondary">MFA Implementation</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="card project-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">SIEM Integration</h5>
+                                    <p class="card-text">Set up endpoint log forwarding to Arctic Wolf; created alert triage workflows</p>
+                                    <div class="mt-2">
+                                        <span class="badge bg-secondary">SIEM</span>
+                                        <span class="badge bg-secondary">Log Management</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  );
-}
+
+    <!-- Projects Page -->
+    <div id="projects-page" class="page">
+        <div class="container py-5">
+            <button class="back-button" onclick="showPage('resume-page')">
+                <i class="fas fa-arrow-left me-2"></i> Back to Resume
+            </button>
+            
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-primary">Security Projects</h1>
+                <p class="lead">Detailed showcase of cybersecurity initiatives and implementations</p>
+            </div>
+            
+            <!-- Project 1 -->
+            <div class="section-card">
+                <div class="section-header">
+                    <i class="fas fa-shield-virus me-2"></i> Phishing Triage Playbook
+                </div>
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>Project Overview</h4>
+                            <p>Developed a comprehensive phishing triage playbook to standardize and accelerate response to email-based threats. The playbook includes identification, analysis, containment, eradication, and recovery procedures.</p>
+                            
+                            <h5 class="mt-4">Key Features</h5>
+                            <ul>
+                                <li>Standardized reporting template for phishing incidents</li>
+                                <li>Automated threat analysis workflow</li>
+                                <li>Escalation paths based on threat severity</li>
+                                <li>Integration with Barracuda Email Security platform</li>
+                                <li>Post-incident review and reporting mechanism</li>
+                            </ul>
+                            
+                            <div class="mt-4">
+                                <h5>Results & Impact</h5>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-chart-line me-2"></i> Reduced response time by 45%
+                                </div>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-user-shield me-2"></i> Improved threat containment efficiency
+                                </div>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-file-alt me-2"></i> Standardized incident documentation
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" 
+                                 class="img-fluid rounded mb-3" 
+                                 alt="Phishing Triage Playbook">
+                            <div class="text-center">
+                                <span class="badge bg-primary me-2">Incident Response</span>
+                                <span class="badge bg-primary me-2">Workflow Design</span>
+                                <span class="badge bg-primary">Email Security</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h5 class="mt-4">Project Gallery</h5>
+                    <div class="project-gallery">
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=200&q=80" alt="Playbook Workflow">
+                            <div class="gallery-caption">
+                                Playbook workflow diagram
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=200&q=80" alt="Reporting Interface">
+                            <div class="gallery-caption">
+                                Incident reporting interface
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=200&q=80" alt="Threat Analysis">
+                            <div class="gallery-caption">
+                                Threat analysis dashboard
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="section-card">
+                <div class="section-header">
+                    <i class="fas fa-lock me-2"></i> Active Directory Hardening
+                </div>
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>Project Overview</h4>
+                            <p>Implemented comprehensive security enhancements to Active Directory infrastructure to reduce attack surface and prevent unauthorized access. The project included policy enforcement, auditing configuration, and privilege management.</p>
+                            
+                            <h5 class="mt-4">Key Enhancements</h5>
+                            <ul>
+                                <li>Implemented account lockout policies after failed attempts</li>
+                                <li>Configured detailed auditing for sensitive AD operations</li>
+                                <li>Privileged access management implementation</li>
+                                <li>Password policy enforcement with complexity requirements</li>
+                                <li>Regular security reviews and compliance checks</li>
+                            </ul>
+                            
+                            <div class="mt-4">
+                                <h5>Results & Impact</h5>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-shield-alt me-2"></i> Reduced unauthorized access attempts
+                                </div>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-clipboard-check me-2"></i> Achieved compliance with CIS benchmarks
+                                </div>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-user-lock me-2"></i> Improved privileged account security
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" 
+                                 class="img-fluid rounded mb-3" 
+                                 alt="Active Directory Security">
+                            <div class="text-center">
+                                <span class="badge bg-primary me-2">AD Security</span>
+                                <span class="badge bg-primary me-2">Policy Enforcement</span>
+                                <span class="badge bg-primary">Access Control</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="section-card">
+                <div class="section-header">
+                    <i class="fas fa-key me-2"></i> Okta MFA Rollout
+                </div>
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>Project Overview</h4>
+                            <p>Led the implementation of Okta Multi-Factor Authentication across the organization to strengthen access control and meet compliance requirements. The rollout included all 500+ employees across multiple departments.</p>
+                            
+                            <h5 class="mt-4">Implementation Process</h5>
+                            <ul>
+                                <li>Requirements analysis and stakeholder alignment</li>
+                                <li>Pilot program with IT and security teams</li>
+                                <li>Phased rollout by department with training sessions</li>
+                                <li>Integration with existing Azure AD infrastructure</li>
+                                <li>Ongoing support and exception management</li>
+                            </ul>
+                            
+                            <div class="mt-4">
+                                <h5>Results & Impact</h5>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-lock me-2"></i> Strengthened access control for all systems
+                                </div>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-check-circle me-2"></i> Achieved regulatory compliance requirements
+                                </div>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-chart-pie me-2"></i> 98% adoption rate within 3 months
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" 
+                                 class="img-fluid rounded mb-3" 
+                                 alt="MFA Implementation">
+                            <div class="text-center">
+                                <span class="badge bg-primary me-2">MFA</span>
+                                <span class="badge bg-primary me-2">Identity Management</span>
+                                <span class="badge bg-primary">Access Control</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h5 class="mt-4">Implementation Metrics</h5>
+                    <div class="row mt-3">
+                        <div class="col-md-4 text-center">
+                            <div class="display-4 fw-bold text-primary">500+</div>
+                            <p>Users Protected</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="display-4 fw-bold text-success">98%</div>
+                            <p>Adoption Rate</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="display-4 fw-bold text-danger">0</div>
+                            <p>Account Compromises</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Cecil Mais</h4>
+                    <p>Cybersecurity-Focused IT System Administrator</p>
+                    <div class="mt-3">
+                        <a href="mailto:cecil13mais@gmail.com" class="text-light me-3">
+                            <i class="fas fa-envelope me-2"></i> cecil13mais@gmail.com
+                        </a><br class="d-md-none">
+                        <a href="tel:+19544780867" class="text-light me-3">
+                            <i class="fas fa-phone me-2"></i> +1 (954) 478-0867
+                        </a><br class="d-md-none">
+                        <a href="https://linkedin.com/in/cecilmais" target="_blank" class="text-light">
+                            <i class="fab fa-linkedin me-2"></i> LinkedIn Profile
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <h5>Security Certifications</h5>
+                    <div class="d-flex flex-wrap">
+                        <span class="cert-badge bg-light text-dark me-2 mb-2">CompTIA Security+</span>
+                        <span class="cert-badge bg-light text-dark me-2 mb-2">AZ-500</span>
+                        <span class="cert-badge bg-light text-dark me-2 mb-2">Network+</span>
+                        <span class="cert-badge bg-light text-dark me-2 mb-2">TryHackMe</span>
+                        <span class="cert-badge bg-warning text-dark me-2 mb-2">CYSA+ (In Progress)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-3 border-top border-secondary">
+                <p>&copy; 2025 Cecil Mais. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Button -->
+    <a href="#" class="floating-btn" onclick="showPage('projects-page')">
+        <i class="fas fa-project-diagram"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active-page');
+            });
+            
+            // Show the selected page
+            document.getElementById(pageId).classList.add('active-page');
+            
+            // Update navigation active state
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Update active nav link
+            if(pageId === 'resume-page') {
+                document.querySelector('.nav-link[onclick="showPage(\'resume-page\')"]').classList.add('active');
+            } else if(pageId === 'projects-page') {
+                document.querySelector('.nav-link[onclick="showPage(\'projects-page\')"]').classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
