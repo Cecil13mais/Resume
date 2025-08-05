@@ -102,12 +102,6 @@
             border-radius: 50%;
         }
         
-        .progress {
-            height: 10px;
-            margin-top: 0.5rem;
-            border-radius: 5px;
-        }
-        
         .contact-info a {
             color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
@@ -251,31 +245,90 @@
             color: white;
         }
         
-        .okta-logo {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
+        .playbook-step {
+            border-left: 4px solid var(--primary);
+            padding: 1rem 0 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
         }
         
-        .okta-logo-bg {
-            background-color: #fff;
-            padding: 20px;
+        .playbook-step:before {
+            content: "🔸";
+            position: absolute;
+            left: -5px;
+            top: 0;
+            font-size: 1.5rem;
+            background: white;
+        }
+        
+        .playbook-step h5 {
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+        
+        .playbook-step ul {
+            padding-left: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .playbook-step ul li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .playbook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .playbook-card {
+            background: #f8f9fa;
             border-radius: 8px;
+            padding: 1.25rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border: 1px solid #e9ecef;
+        }
+        
+        .playbook-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+        
+        .playbook-card h6 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .playbook-card h6 i {
+            background: var(--primary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100%;
+            font-size: 0.85rem;
         }
         
-        .okta-project-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .playbook-section {
+            background: #e9f7fe;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border-left: 4px solid var(--primary);
         }
         
-        .okta-project-header h3 {
-            margin: 0;
+        .playbook-section h4 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--primary);
         }
     </style>
 </head>
@@ -567,11 +620,8 @@
                         <div class="col-md-6 mb-4">
                             <div class="card project-card h-100">
                                 <div class="card-body">
-                                    <div class="okta-project-header">
-                                        <img src="https://play-lh.googleusercontent.com/j_EqnL2jos36xeLIZh7p1xn_tmDFzaeeJKrilZPu6V1gXKWvVZcIBwjsKHL9zv_naQA" alt="Okta Logo" width="60">
-                                        <h5 class="card-title">Okta MFA Rollout</h5>
-                                    </div>
-                                    <p class="card-text mt-2">Enforced MFA for 500+ users, strengthening access control and meeting compliance</p>
+                                    <h5 class="card-title">Okta MFA Rollout</h5>
+                                    <p class="card-text">Enforced MFA for 500+ users, strengthening access control and meeting compliance</p>
                                     <div class="mt-2">
                                         <span class="badge bg-secondary">Identity Management</span>
                                         <span class="badge bg-secondary">MFA Implementation</span>
@@ -610,7 +660,7 @@
                 <p class="lead">Detailed showcase of cybersecurity initiatives and implementations</p>
             </div>
             
-            <!-- Project 1 -->
+            <!-- Phishing Triage Playbook Project -->
             <div class="section-card">
                 <div class="section-header">
                     <i class="fas fa-shield-virus me-2"></i> Phishing Triage Playbook
@@ -655,6 +705,135 @@
                         </div>
                     </div>
                     
+                    <!-- Playbook Steps Section -->
+                    <div class="playbook-section">
+                        <h4><i class="fas fa-book me-2"></i> Phishing Triage Playbook Steps</h4>
+                        
+                        <div class="playbook-step">
+                            <h5>1. Initial Report Intake</h5>
+                            <p><strong>Sources of Report:</strong></p>
+                            <ul>
+                                <li>Internal user</li>
+                                <li>Automated tool</li>
+                                <li>External partner</li>
+                            </ul>
+                            <p><strong>Immediate Actions:</strong></p>
+                            <ul>
+                                <li>Acknowledge receipt of report</li>
+                                <li>Assign tickets in tracking system</li>
+                            </ul>
+                            <p><strong>Information to Collect:</strong></p>
+                            <ul>
+                                <li>Full email headers</li>
+                                <li>Body of the message (HTML/plaintext)</li>
+                                <li>Any attachments or links</li>
+                                <li>Recipient and sender addresses</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="playbook-step">
+                            <h5>2. Preliminary Assessment (Triage)</h5>
+                            <p><strong>Indicators to Check:</strong></p>
+                            <ul>
+                                <li>Spoofed sender? (check SPF/DKIM/DMARC)</li>
+                                <li>Suspicious domains or URLs?</li>
+                                <li>Urgent language or threats?</li>
+                                <li>Unusual time of sending?</li>
+                                <li>Malicious attachments?</li>
+                            </ul>
+                            <p><strong>Use Tools:</strong></p>
+                            <ul>
+                                <li>VirusTotal, URLScan.io, AnyRun</li>
+                                <li>Email header analyzer</li>
+                                <li>Sandbox or detonation chamber (for attachments)</li>
+                            </ul>
+                            <p><strong>Categorize the Email:</strong></p>
+                            <ul>
+                                <li>Benign: Marketing, internal error, etc.</li>
+                                <li>Spam: Not malicious but unsolicited</li>
+                                <li>Phishing: Malicious intent or credential theft</li>
+                                <li>Malware: Attachment with malicious code</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="playbook-step">
+                            <h5>3. Containment Actions</h5>
+                            <p>If confirmed phishing/malicious:</p>
+                            <ul>
+                                <li>Quarantine message from all recipients (e.g., via Microsoft Defender, Proofpoint)</li>
+                                <li>Block sender domain/IP if not legitimate</li>
+                                <li>Add to denylist (email gateway, EDR, firewall)</li>
+                                <li>Disable or reset credentials if user clicked or entered info</li>
+                                <li>Isolate affected endpoints (via EDR)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="playbook-step">
+                            <h5>4. Analysis & Enrichment</h5>
+                            <p><strong>Perform deeper analysis:</strong></p>
+                            <ul>
+                                <li>Extract IOCs: domains, IPs, hashes, URLs</li>
+                                <li>Check against threat intel platforms (AlienVault OTX, MISP, AbuseIPDB)</li>
+                                <li>Link to known campaigns (e.g., via MITRE ATT&CK)</li>
+                            </ul>
+                            <p><strong>Document:</strong></p>
+                            <ul>
+                                <li>Email metadata</li>
+                                <li>Screenshots</li>
+                                <li>IOC timeline</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="playbook-step">
+                            <h5>5. User Follow-up</h5>
+                            <ul>
+                                <li>Notify affected users of phishing determination</li>
+                                <li><strong>Provide guidance:</strong>
+                                    <ul>
+                                        <li>"Do not click links or download attachments"</li>
+                                        <li>"Reset your password immediately if you clicked or entered credentials"</li>
+                                    </ul>
+                                </li>
+                                <li>Offer security awareness resources</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="playbook-step">
+                            <h5>6. Remediation</h5>
+                            <ul>
+                                <li>Block URLs/domains in email gateway/proxy</li>
+                                <li>Remove email copies from other inboxes</li>
+                                <li>Reset user credentials or tokens</li>
+                                <li>Scan endpoint for persistence mechanisms</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="playbook-step">
+                            <h5>7. Reporting & Documentation</h5>
+                            <p><strong>Document all findings in ticket:</strong></p>
+                            <ul>
+                                <li>Final classification</li>
+                                <li>Actions taken</li>
+                                <li>IOCs discovered</li>
+                                <li>Affected users/assets</li>
+                            </ul>
+                            <ul>
+                                <li>Share with threat intelligence team</li>
+                                <li>Escalate to IR team if part of broader campaign</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="playbook-step">
+                            <h5>8. Post-Incident Activities</h5>
+                            <ul>
+                                <li>Update detection rules (SIEM, email filters)</li>
+                                <li>Conduct user awareness training if needed</li>
+                                <li>Hold lessons-learned review for SOC team</li>
+                                <li>Update playbook if gaps were identified</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
                     <h5 class="mt-4">Project Gallery</h5>
                     <div class="project-gallery">
                         <div class="gallery-item">
@@ -679,7 +858,7 @@
                 </div>
             </div>
             
-            <!-- Project 2 -->
+            <!-- Other Projects (simplified for brevity) -->
             <div class="section-card">
                 <div class="section-header">
                     <i class="fas fa-lock me-2"></i> Active Directory Hardening
@@ -688,17 +867,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h4>Project Overview</h4>
-                            <p>Implemented comprehensive security enhancements to Active Directory infrastructure to reduce attack surface and prevent unauthorized access. The project included policy enforcement, auditing configuration, and privilege management.</p>
-                            
-                            <h5 class="mt-4">Key Enhancements</h5>
-                            <ul>
-                                <li>Implemented account lockout policies after failed attempts</li>
-                                <li>Configured detailed auditing for sensitive AD operations</li>
-                                <li>Privileged access management implementation</li>
-                                <li>Password policy enforcement with complexity requirements</li>
-                                <li>Regular security reviews and compliance checks</li>
-                            </ul>
-                            
+                            <p>Implemented comprehensive security enhancements to Active Directory infrastructure to reduce attack surface and prevent unauthorized access.</p>
                             <div class="mt-4">
                                 <h5>Results & Impact</h5>
                                 <div class="achievement-badge">
@@ -707,137 +876,12 @@
                                 <div class="achievement-badge">
                                     <i class="fas fa-clipboard-check me-2"></i> Achieved compliance with CIS benchmarks
                                 </div>
-                                <div class="achievement-badge">
-                                    <i class="fas fa-user-lock me-2"></i> Improved privileged account security
-                                </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <img src="https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" 
                                  class="img-fluid rounded mb-3" 
                                  alt="Active Directory Security">
-                            <div class="text-center">
-                                <span class="badge bg-primary me-2">AD Security</span>
-                                <span class="badge bg-primary me-2">Policy Enforcement</span>
-                                <span class="badge bg-primary">Access Control</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Project 3 - Okta MFA Rollout -->
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="okta-project-header">
-                        <img src="https://play-lh.googleusercontent.com/j_EqnL2jos36xeLIZh7p1xn_tmDFzaeeJKrilZPu6V1gXKWvVZcIBwjsKHL9zv_naQA" alt="Okta Logo" width="40">
-                        <span>Okta MFA Rollout</span>
-                    </div>
-                </div>
-                <div class="section-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h4>Project Overview</h4>
-                            <p>Led the implementation of Okta Multi-Factor Authentication across the organization to strengthen access control and meet compliance requirements. The rollout included all 500+ employees across multiple departments.</p>
-                            
-                            <h5 class="mt-4">Implementation Process</h5>
-                            <ul>
-                                <li>Requirements analysis and stakeholder alignment</li>
-                                <li>Pilot program with IT and security teams</li>
-                                <li>Phased rollout by department with training sessions</li>
-                                <li>Integration with existing Azure AD infrastructure</li>
-                                <li>Ongoing support and exception management</li>
-                            </ul>
-                            
-                            <div class="mt-4">
-                                <h5>Results & Impact</h5>
-                                <div class="achievement-badge">
-                                    <i class="fas fa-lock me-2"></i> Strengthened access control for all systems
-                                </div>
-                                <div class="achievement-badge">
-                                    <i class="fas fa-check-circle me-2"></i> Achieved regulatory compliance requirements
-                                </div>
-                                <div class="achievement-badge">
-                                    <i class="fas fa-chart-pie me-2"></i> 98% adoption rate within 3 months
-                                </div>
-                                <div class="achievement-badge">
-                                    <i class="fas fa-shield-alt me-2"></i> Zero account compromises post-implementation
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="okta-logo-bg">
-                                <img src="https://play-lh.googleusercontent.com/j_EqnL2jos36xeLIZh7p1xn_tmDFzaeeJKrilZPu6V1gXKWvVZcIBwjsKHL9zv_naQA" 
-                                     class="okta-logo" 
-                                     alt="Okta Identity Platform">
-                            </div>
-                            <div class="text-center mt-3">
-                                <span class="badge bg-primary me-2">MFA</span>
-                                <span class="badge bg-primary me-2">Identity Management</span>
-                                <span class="badge bg-primary">Access Control</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h5 class="mt-4">Implementation Details</h5>
-                    <div class="row mt-3">
-                        <div class="col-md-3">
-                            <div class="card h-100">
-                                <div class="card-body text-center">
-                                    <i class="fas fa-users fa-3x text-primary mb-3"></i>
-                                    <h5>Scope</h5>
-                                    <p>500+ users across all departments</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card h-100">
-                                <div class="card-body text-center">
-                                    <i class="fas fa-mobile-alt fa-3x text-success mb-3"></i>
-                                    <h5>Authentication Methods</h5>
-                                    <p>Push notifications, SMS, TOTP</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card h-100">
-                                <div class="card-body text-center">
-                                    <i class="fas fa-calendar-check fa-3x text-info mb-3"></i>
-                                    <h5>Timeline</h5>
-                                    <p>3-month rollout with phased approach</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card h-100">
-                                <div class="card-body text-center">
-                                    <i class="fas fa-chart-line fa-3x text-warning mb-3"></i>
-                                    <h5>Adoption Rate</h5>
-                                    <p>98% within first quarter</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h5 class="mt-4">Project Gallery</h5>
-                    <div class="project-gallery">
-                        <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1609921212029-bb5a28e60960?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=200&q=80" alt="MFA Setup">
-                            <div class="gallery-caption">
-                                MFA setup interface
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=200&q=80" alt="Training Session">
-                            <div class="gallery-caption">
-                                Employee training session
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=200&q=80" alt="Dashboard">
-                            <div class="gallery-caption">
-                                Compliance dashboard
-                            </div>
                         </div>
                     </div>
                 </div>
